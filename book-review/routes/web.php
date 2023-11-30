@@ -1,7 +1,9 @@
 <?php
 
 use \App\Models\Book;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -16,10 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dd();
+    return view('home');
 });
 
-Route::get('/index', function () {
-    $book = Book::popular()->get();
-    return view('index', ['books' => $book]);
-})->name('book.index');
+Route::resource('books', BookController::class);
