@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')->references('id')->on('books')->cascadeOnDelete();
 
             $table->text('review');
             $table->unsignedTinyInteger('rating');
+            
             $table->timestamps();
-
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 
