@@ -1,8 +1,11 @@
 <div>
-    <form>
+    <form wire:submit.prevent="createPoll">
         <label>Poll Title</label>
 
         <input type="text" wire:model.live.debounce.500ms="title">
+        @error('title')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
 
         Current Title: {{ $title }}
 
@@ -19,9 +22,14 @@
                             <input type="text" wire:model="options.{{ $index }}"/>
                             <button class="btn" wire:click.prevent="removeOption({{ $index }})">Remove</button>
                         </div>
+                        @error("options.{$index}")
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
                     </div>
                 @endforeach
             </div>
         </div>
+
+        <button type="submit" class="btn">Create Poll</button>
     </form>
 </div>
